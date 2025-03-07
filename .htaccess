@@ -1,0 +1,15 @@
+RewriteEngine On
+#RewriteBase /
+
+RewriteRule ^sign-in.html$ sign-in.php [L]
+RewriteRule ^sign-up.html$ sign-up.php [L]
+RewriteRule ^logout.html$ logout.php [L]
+RewriteRule ^index.html$ index.php?page=index [L]
+RewriteRule ^films.html$ index.php?page=films [QSA]
+RewriteRule ^film-detail.html$ index.php?page=film-detail [QSA]
+RewriteRule ^schedules.html$ index.php?page=schedules [QSA]
+RewriteRule ^seats.html$ index.php?page=seats [QSA]
+RewriteRule ^purchase.html$ index.php?page=purchase [QSA]
+RewriteRule ^profile.html$ index.php?page=profile [QSA]
+RewriteRule ^history.html$ index.php?page=history [QSA]
+RewriteRule ^booking-detail.html$ index.php?page=booking-detail [QSA]

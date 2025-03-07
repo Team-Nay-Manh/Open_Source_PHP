@@ -1,0 +1,22 @@
+RewriteEngine On
+#RewriteBase /
+
+RewriteRule ^login.html$ login.php [L]
+RewriteRule ^logout.html$ logout.php [L]
+RewriteRule ^index.html$ index.php?page=index [L]
+RewriteRule ^countries.html$ index.php?page=countries [QSA]
+RewriteRule ^country.html$ index.php?page=country [QSA]
+RewriteRule ^categories.html$ index.php?page=categories [QSA]
+RewriteRule ^category.html$ index.php?page=category [QSA]
+RewriteRule ^cinemas.html$ index.php?page=cinemas [QSA]
+RewriteRule ^cinema.html$ index.php?page=cinema [QSA]
+RewriteRule ^films.html$ index.php?page=films [QSA]
+RewriteRule ^film.html$ index.php?page=film [QSA]
+RewriteRule ^schedules.html$ index.php?page=schedules [QSA]
+RewriteRule ^schedule.html$ index.php?page=schedule [QSA]
+RewriteRule ^tickets.html$ index.php?page=tickets [QSA]
+RewriteRule ^ticket.html$ index.php?page=ticket [QSA]
+RewriteRule ^users.html$ index.php?page=users [QSA]
+RewriteRule ^user.html$ index.php?page=user [QSA]
+RewriteRule ^bookings.html$ index.php?page=bookings [QSA]
+RewriteRule ^booking.html$ index.php?page=booking [QSA]

@@ -6,7 +6,7 @@ if ($_POST) {
     $_SESSION['admin'] = '1';
     header('Location: index.html');
   } else {
-    $msg = 'Đăng nhập thất bại, vui lòng thử lại!';
+    $msg = 'Đăng nhập thất bại, vui lòng thử lại!123123123';
   }
 }
 ?>

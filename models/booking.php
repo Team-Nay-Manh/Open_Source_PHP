@@ -15,6 +15,7 @@ class Booking extends DB
 
   function GetBookingById($id)
   {
+    
     $id = mysqli_escape_string($this->conn, $id);
     $a = mysqli_query($this->conn, 'SELECT B.*, F.id AS film_id, F.name AS film_name, F.poster AS film_poster FROM booking B LEFT JOIN schedule S ON B.schedule_id = S.id LEFT JOIN film F ON S.film_id = F.id WHERE B.id = ' . $id);
     if (mysqli_num_rows($a))

@@ -48,7 +48,7 @@ if ($_POST) {
             <div class="col-12">
               <div class="row">
                 <div class="col-12">
-                  <button type="submit" class="form__btn">thực hiện</button>
+                  <button type="submit" class="form__btn">Thực hiện</button>
                 </div>
               </div>
             </div>

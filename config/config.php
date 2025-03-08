@@ -13,3 +13,4 @@ define('DATA_PER_PAGE', '9');
 
 include_once("function.php");
 include_once("DB.php");
+?>

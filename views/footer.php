@@ -121,6 +121,16 @@
         window.location.href = 'purchase.html?schedule_id=' + sid + '&seats=' + $('#code-seat').text().trim(',');
     }
 </script>
+
+<!--chat bot-->
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger intent="WELCOME"
+              chat-icon="https://cdn-icons-png.flaticon.com/512/4954/4954813.png"
+              chat-title="Ba Anh Em bot"
+              agent-id="6e08a620-4272-4ba0-be06-c4f3b7366ddf"
+              language-code="vi">
+
+</df-messenger>
 </body>
 
 </html>

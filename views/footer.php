@@ -1,3 +1,6 @@
+<?php 
+    require_once("config/config.php");
+?>
 <!-- ==========Newslater-Section========== -->
 <footer class="footer-section">
     <div class="container">
@@ -125,10 +128,10 @@
 <!--chat bot-->
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <df-messenger intent="WELCOME"
-              chat-icon="https://cdn-icons-png.flaticon.com/512/4954/4954813.png"
-              chat-title="Ba Anh Em bot"
-              agent-id="6e08a620-4272-4ba0-be06-c4f3b7366ddf"
-              language-code="vi">
+              chat-icon="<?php echo DIALOGFLOW_CHAT_ICON ?>"
+              chat-title="<?php echo DIALOGFLOW_CHAT_TITLE ?>"
+              agent-id="<?php echo DIALOGFLOW_AGENT_ID ?>"
+              language-code="<?php echo DIALOGFLOW_LANGUAGE_CODE ?>">
 
 </df-messenger>
 </body>

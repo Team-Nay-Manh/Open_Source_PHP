@@ -21,7 +21,7 @@ $category = new Category();
     <link rel="stylesheet" href="assets/css/nice-select.css" />
     <link rel="stylesheet" href="assets/css/jquery.animatedheadline.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
-
+    <link rel="stylesheet" href="assets/css/chatbot.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 
     <!-- <c:choose>
@@ -29,10 +29,11 @@ $category = new Category();
             <title>Boleto - ${title}</title>
         </c:when>
         <c:otherwise> -->
-    <title>Boleto - Đặt vé phim trực tuyến</title>
+    <title>Vì Tinh Tú - Đặt vé phim trực tuyến</title>
     <!-- </c:otherwise>
     </c:choose> -->
 
+    
 </head>
 
 <body>

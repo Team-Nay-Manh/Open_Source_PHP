@@ -1,3 +1,6 @@
+<?php 
+    require_once("config/config.php");
+?>
 <!-- ==========Newslater-Section========== -->
 <footer class="footer-section">
     <div class="container">
@@ -121,6 +124,16 @@
         window.location.href = 'purchase.html?schedule_id=' + sid + '&seats=' + $('#code-seat').text().trim(',');
     }
 </script>
+
+<!--chat bot-->
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger intent="WELCOME"
+              chat-icon="<?php echo DIALOGFLOW_CHAT_ICON ?>"
+              chat-title="<?php echo DIALOGFLOW_CHAT_TITLE ?>"
+              agent-id="<?php echo DIALOGFLOW_AGENT_ID ?>"
+              language-code="<?php echo DIALOGFLOW_LANGUAGE_CODE ?>">
+
+</df-messenger>
 </body>
 
 </html>

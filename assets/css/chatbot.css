@@ -1,0 +1,14 @@
+df-messenger {
+    --df-messenger-bot-message: #878fac;
+    --df-messenger-button-titlebar-color: linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%) !important;
+    --df-messenger-button-titlebar-font-color:black;
+    --df-messenger-titlebar-background:rgb(169, 49, 216) !important;
+    --df-messenger-chat-background-color: #fafafa;
+    --df-messenger-font-color: white;
+    --df-messenger-send-icon: #878fac;
+    --df-messenger-user-message: #5560ff;
+    --df-messenger-message-feedback-icon-background-hover: rgba(255, 255, 255, 0.2);
+    --df-messenger-message-bot-border: 1px solid black;
+    --df-messenger-message-border: 1px solid black;
+    --df-messenger-chat-bubble-icon-color: white;
+}

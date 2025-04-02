@@ -7,7 +7,7 @@
         <div class="footer-top">
             <div class="logo">
                 <a href="index-1.html">
-                    <img src="assets/images/footer/footer-logo.png" alt="footer" />
+                    <img src="assets/images/footer/footer-logo-.png" alt="footer" />
                 </a>
             </div>
             <ul class="social-icons">
@@ -41,7 +41,7 @@
         <div class="footer-bottom">
             <div class="footer-bottom-area">
                 <div class="left">
-                    <p>Copyright &copy; 2023. All Rights Reserved By <a href="#0">NoName</a></p>
+                    <p>Copyright &copy; 2025. All Rights Reserved By <a href="#0">Teamnaymanh</a></p>
                 </div>
                 <ul class="links">
                     <li>
@@ -100,18 +100,19 @@
         return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Nice Select
         $(".select-bar").niceSelect();
-        $('div.select-bar').on('click', function (event) {
+        $('div.select-bar').on('click', function(event) {
             console.log(event);
             if (event.target.className.includes("option") && !event.target.className.includes("focus"))
                 redirectParams('date', event.target.innerText);
-//                console.log(event.target.innerText);
+            //                console.log(event.target.innerText);
         });
     });
 
     let schedule_id = 0;
+
     function setScheduleId(id) {
         schedule_id = id;
     }

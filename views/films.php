@@ -21,7 +21,7 @@ if ($pg < 1 || $pg == '' || !is_numeric($pg)) $pg = 1;
             <div class="row align-items-center mb--20">
                 <div class="col-lg-6 mb-20">
                     <div class="search-ticket-header">
-                        <h6 class="category">welcome to NoName</h6>
+                        <h6 class="category">welcome to Teamnaymanh</h6>
                         <!--<h3 class="title">what are you looking for</h3>-->
                     </div>
                 </div>

@@ -60,7 +60,7 @@ $category = new Category();
             <div class="header-wrapper">
                 <div class="logo">
                     <a href="./">
-                        <img src="assets/images/logo/logo.png" alt="logo">
+                        <img src="assets/images/logo/logo-.png" alt="logo">
                     </a>
                 </div>
                 <ul class="menu">

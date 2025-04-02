@@ -21,6 +21,199 @@
   <meta name="keywords" content="" />
   <title>Trang quản trị Admin</title>
 
+  <style>
+    /* Reset cơ bản */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #26313c;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+      color: #fff;
+      padding: 20px 15px;
+      display: flex;
+      flex-direction: column;
+      transition: width 0.3s ease;
+      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Logo */
+    .sidebar__logo {
+      display: block;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar__logo img {
+      max-width: 120px;
+      transition: transform 0.2s ease;
+    }
+
+    .sidebar__logo:hover img {
+      transform: scale(1.05);
+    }
+
+    /* User section */
+    .sidebar__user {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    .sidebar__user-img {
+      width: 40px;
+      height: 40px;
+      margin-right: 12px;
+    }
+
+    .sidebar__user-img img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .sidebar__user-title {
+      flex-grow: 1;
+    }
+
+    .sidebar__user-title span {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .sidebar__user-title p {
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .sidebar__user-btn {
+      background: none;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .sidebar__user-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #e74c3c;
+      transition: transform 0.2s ease;
+    }
+
+    .sidebar__user-btn:hover svg {
+      transform: scale(1.1);
+    }
+
+    /* Navigation */
+    .sidebar__nav {
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .sidebar__nav-item {
+      margin-bottom: 5px;
+    }
+
+    .sidebar__nav-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .sidebar__nav-link svg {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      fill: rgba(255, 255, 255, 0.7);
+      transition: fill 0.2s ease;
+    }
+
+    .sidebar__nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .sidebar__nav-link:hover svg {
+      fill: #fff;
+    }
+
+    /* Copyright */
+    .sidebar__copyright {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.6;
+      padding-top: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 80px;
+        padding: 15px 10px;
+      }
+
+      .sidebar__logo img {
+        max-width: 50px;
+      }
+
+      .sidebar__user-title,
+      .sidebar__copyright,
+      .sidebar__nav-link span {
+        display: none;
+      }
+
+      .sidebar__user {
+        padding: 10px;
+        justify-content: center;
+      }
+
+      .sidebar__user-img {
+        margin-right: 0;
+      }
+
+      .sidebar__nav-link {
+        justify-content: center;
+        padding: 12px;
+      }
+
+      .sidebar__nav-link svg {
+        margin-right: 0;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .sidebar__nav-link span {
+        display: inline;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -30,7 +223,7 @@
     <div class="header__content">
       <!-- header logo -->
       <a href="index.html" class="header__logo">
-        <img src="assets/img/logo.png" alt="" />
+        <img src="assets/img/logo-.png" alt="" />
       </a>
       <!-- end header logo -->
 
@@ -48,15 +241,15 @@
   <!-- sidebar -->
   <div class="sidebar">
     <!-- sidebar logo -->
-    <a href="index.html" class="sidebar__logo">
-      <img src="assets/img/logo.png" alt="" />
-    </a>
+    <!-- <a href="index.html" class="sidebar__logo">
+      <img src="assets/img/logo-.png" alt="" />
+    </a> -->
     <!-- end sidebar logo -->
 
     <!-- sidebar user -->
     <div class="sidebar__user">
       <div class="sidebar__user-img">
-        <img src="assets/img/user.svg" alt="" />
+        <img src="assets/img/user2.png" alt="" />
       </div>
 
       <div class="sidebar__user-title">
@@ -140,7 +333,7 @@
     <!-- end sidebar nav -->
 
     <!-- sidebar copyright -->
-    <div class="sidebar__copyright">© NoName, 2023.</div>
+    <div class="sidebar__copyright">© Teamnaymanh, 2025.</div>
     <!-- end sidebar copyright -->
   </div>
   <!-- end sidebar -->

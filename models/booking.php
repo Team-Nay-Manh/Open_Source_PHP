@@ -1,14 +1,55 @@
 <?php
 class Booking extends DB
 {
-  function GetBookings()
+  function GetBookings($page = 1, $limit = 10, $filters = [])
   {
-    $a = mysqli_query($this->conn, 'SELECT B.*, U.full_name AS user_full_name, S.start_time AS schedule_start_time, F.id AS film_id, F.name AS film_name, F.poster AS film_poster FROM booking B LEFT JOIN schedule S ON B.schedule_id = S.id LEFT JOIN film F ON S.film_id = F.id LEFT JOIN user U ON B.user_id = U.id ORDER BY B.id DESC');
-    $b = array();
-    if (mysqli_num_rows($a))
-      while ($row = mysqli_fetch_assoc($a)) {
-        $b = array_merge($b, array($row));
+    $offset = ($page - 1) * $limit;
+    
+    $where = '';
+    $params = [];
+    
+    // Xử lý bộ lọc
+    if (!empty($filters)) {
+      $conditions = [];
+      
+      if (!empty($filters['user_id'])) {
+        $conditions[] = 'B.user_id = ' . mysqli_escape_string($this->conn, $filters['user_id']);
       }
+      
+      if (!empty($filters['film_id'])) {
+        $conditions[] = 'F.id = ' . mysqli_escape_string($this->conn, $filters['film_id']);
+      }
+      
+      if (!empty($filters['date_from'])) {
+        $conditions[] = 'B.created_at >= "' . mysqli_escape_string($this->conn, $filters['date_from']) . '"';
+      }
+      
+      if (!empty($filters['date_to'])) {
+        $conditions[] = 'B.created_at <= "' . mysqli_escape_string($this->conn, $filters['date_to']) . '"';
+      }
+      
+      if (!empty($conditions)) {
+        $where = ' WHERE ' . implode(' AND ', $conditions);
+      }
+    }
+    
+    $query = 'SELECT B.*, U.full_name AS user_full_name, S.start_time AS schedule_start_time, F.id AS film_id, F.name AS film_name, F.poster AS film_poster 
+              FROM booking B 
+              LEFT JOIN schedule S ON B.schedule_id = S.id 
+              LEFT JOIN film F ON S.film_id = F.id 
+              LEFT JOIN user U ON B.user_id = U.id' . $where . '
+              ORDER BY B.id DESC 
+              LIMIT ' . $offset . ', ' . $limit;
+    
+    $a = mysqli_query($this->conn, $query);
+    $b = array();
+    
+    if (mysqli_num_rows($a)) {
+      while ($row = mysqli_fetch_assoc($a)) {
+        $b[] = $row; // Dùng cách hiệu quả hơn để thêm vào mảng
+      }
+    }
+    
     mysqli_free_result($a);
     return $b;
   }
@@ -133,10 +174,44 @@ class Booking extends DB
     }
   }
 
-  function GetCountBookings()
+  function GetCountBookings($filters = [])
   {
-    $total = mysqli_query($this->conn, 'SELECT COUNT(id) AS total FROM booking');
-    $total = mysqli_fetch_assoc($total)['total'];
+    $where = '';
+    
+    // Xử lý bộ lọc
+    if (!empty($filters)) {
+      $conditions = [];
+      
+      if (!empty($filters['user_id'])) {
+        $conditions[] = 'B.user_id = ' . mysqli_escape_string($this->conn, $filters['user_id']);
+      }
+      
+      if (!empty($filters['film_id'])) {
+        $conditions[] = 'F.id = ' . mysqli_escape_string($this->conn, $filters['film_id']);
+      }
+      
+      if (!empty($filters['date_from'])) {
+        $conditions[] = 'B.created_at >= "' . mysqli_escape_string($this->conn, $filters['date_from']) . '"';
+      }
+      
+      if (!empty($filters['date_to'])) {
+        $conditions[] = 'B.created_at <= "' . mysqli_escape_string($this->conn, $filters['date_to']) . '"';
+      }
+      
+      if (!empty($conditions)) {
+        $where = ' WHERE ' . implode(' AND ', $conditions);
+      }
+    }
+    
+    $query = 'SELECT COUNT(B.id) AS total 
+              FROM booking B 
+              LEFT JOIN schedule S ON B.schedule_id = S.id 
+              LEFT JOIN film F ON S.film_id = F.id 
+              LEFT JOIN user U ON B.user_id = U.id' . $where;
+    
+    $result = mysqli_query($this->conn, $query);
+    $total = mysqli_fetch_assoc($result)['total'];
+    mysqli_free_result($result);
     return $total;
   }
 

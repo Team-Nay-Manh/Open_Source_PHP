@@ -1,20 +1,38 @@
 <?php
 $id = 0;
-$full_name = $email = $phone = $address = $created_at = '';
 $booking = new Booking;
 
+// Kiểm tra và lấy thông tin booking từ ID
 if (getGET('id')) {
   $b = $booking->GetBookingById(getGET('id'));
-  ['id' => $id] = $b;
+  if ($b) {
+    $id = $b['id'];
+  }
 }
-if (!$id) echo '<script>window.location.replace("bookings.html");</script>';
 
+// Redirect nếu không tìm thấy booking
+if (!$id) {
+  echo '<script>window.location.replace("bookings.html");</script>';
+  exit;
+}
+
+// Lấy thông tin liên quan đến booking
 $user = new User;
-$u = $user->GetUserByID($b['user_id']);
+$u = $user->GetUserByID($b['user_id']) ?: array('id' => '', 'full_name' => '', 'email' => '');
+
 $schedule = new Schedule;
-$s = $schedule->GetSchedule($b['schedule_id']);
+$s = $schedule->GetSchedule($b['schedule_id']) ?: array('id' => '', 'film_id' => '', 'start_time' => '', 'cinema_name' => '', 'room_name' => '');
+
 $film = new Film;
-$f = $film->GetFilm($s['film_id']);
+$f = $film->GetFilm($s['film_id']) ?: array('id' => '', 'name' => '');
+
+// Lấy chi tiết booking
+$booking_details = $booking->GetBookingDetailsByBookingId($b['id']);
+$booking_detail = array();
+foreach ($booking_details as $detail) {
+  $booking_detail[] = $detail['seat'];
+}
+$booking_detail = implode(', ', $booking_detail);
 ?>
 <!-- main content -->
 <main class="main">
@@ -93,13 +111,6 @@ $f = $film->GetFilm($s['film_id']);
               <div class="col-12 col-md-6 col-lg-12 col-xl-12">
                 <div class="profile__group">
                   <label class="profile__label" for="booking_detail">Chi tiết vé</label>
-                  <?php
-                  $booking_detail = [];
-                  foreach ($booking->GetBookingDetailsByBookingId($b['id']) as $k => $v) {
-                    $booking_detail[] = $v['seat'];
-                  }
-                  $booking_detail = implode(', ', $booking_detail);
-                  ?>
                   <input id="booking_detail" type="text" name="booking_detail" class="profile__input" value="<?php echo $booking_detail; ?>" disabled />
                 </div>
               </div>

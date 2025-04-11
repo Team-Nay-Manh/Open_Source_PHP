@@ -1,6 +1,8 @@
 <?php
-$pg = getGET('p');
+$pg = isset($_GET['p']) ? $_GET['p'] : 1;
 if ($pg < 1 || $pg == '' || !is_numeric($pg)) $pg = 1;
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+$category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
 ?>
 <!-- ==========Banner-Section========== -->
 <section class="banner-section">
@@ -40,9 +42,12 @@ if ($pg < 1 || $pg == '' || !is_numeric($pg)) $pg = 1;
                 <div class="tab-item active">
                     <form class="ticket-search-form" action="films.html" method="GET">
                         <div class="form-group large">
-                            <input type="text" placeholder="Tìm phim" name="keyword" value="" />
+                            <input type="text" placeholder="Tìm phim" name="keyword" value="<?php echo htmlspecialchars($keyword); ?>" />
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </div>
+                        <?php if ($pg > 1) { ?>
+                            <input type="hidden" name="p" value="<?php echo $pg; ?>" />
+                        <?php } ?>
                     </form>
                 </div>
             </div>
@@ -78,32 +83,45 @@ if ($pg < 1 || $pg == '' || !is_numeric($pg)) $pg = 1;
                             <div class="row mb-10 justify-content-center">
                                 <?php
                                 $film = new Film();
-                                if (getGET('category_id'))
-                                    $list_films = $film->GetFilmsByCategoryId($pg, getGET('category_id'));
-                                else $list_films = $film->GetFilms($pg, getGET('keyword'));
-                                foreach ($list_films as $k => $v) {
+                                if ($category_id) {
+                                    $list_films = $film->GetFilmsByCategoryId($category_id, $pg);
+                                    $total_count = $film->GetCount();
+                                } else {
+                                    $list_films = $film->GetFilms($pg, $keyword);
+                                    $total_count = $keyword ? $film->GetCountByKeyword($keyword) : $film->GetCount();
+                                }
+
+                                if (count($list_films) > 0) {
+                                    foreach ($list_films as $k => $v) {
                                 ?>
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="movie-grid">
-                                            <div class="movie-thumb c-thumb">
-                                                <a href="film-detail.html?id=<?php echo $v['id']; ?>">
-                                                    <img src="<?php echo $v['poster']; ?>" alt="movie" height="357px" width="255px" />
-                                                </a>
-                                            </div>
-                                            <div class="movie-content bg-one">
-                                                <h5 class="title m-0" style="font-size: 18px;">
-                                                    <a href="film-detail.html?id=<?php echo $v['id']; ?>"><?php echo $v['name']; ?></a>
-                                                </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="./assets/images/movie/tomato.png" alt="movie" />
-                                                        </div>
-                                                        <span class="content"><?php echo $v['duration']; ?> phút</span>
-                                                    </li>
-                                                </ul>
+                                        <div class="col-sm-6 col-lg-4">
+                                            <div class="movie-grid">
+                                                <div class="movie-thumb c-thumb">
+                                                    <a href="film-detail.html?id=<?php echo $v['id']; ?>">
+                                                        <img src="<?php echo $v['poster']; ?>" alt="movie" height="357px" width="255px" />
+                                                    </a>
+                                                </div>
+                                                <div class="movie-content bg-one">
+                                                    <h5 class="title m-0" style="font-size: 18px;">
+                                                        <a href="film-detail.html?id=<?php echo $v['id']; ?>"><?php echo $v['name']; ?></a>
+                                                    </h5>
+                                                    <ul class="movie-rating-percent">
+                                                        <li>
+                                                            <div class="thumb">
+                                                                <img src="./assets/images/movie/tomato.png" alt="movie" />
+                                                            </div>
+                                                            <span class="content"><?php echo $v['duration']; ?> phút</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
+                                    <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <div class="col-12 text-center">
+                                        <h4>Không tìm thấy phim phù hợp!</h4>
                                     </div>
                                 <?php } ?>
 
@@ -112,13 +130,16 @@ if ($pg < 1 || $pg == '' || !is_numeric($pg)) $pg = 1;
                     </div>
                     <div class="pagination-area text-center">
                         <?php
-                        $end_page = ceil((float) $film->GetCount() / DATA_PER_PAGE);
-                        for ($i = 1; $i <= $end_page; $i++)
-                            if (abs($pg - $i) <= 3 || $i == 1 || $i == $end_page) {
+                        $end_page = ceil((float) $total_count / DATA_PER_PAGE);
+                        if ($end_page > 1) {
+                            for ($i = 1; $i <= $end_page; $i++) {
+                                if (abs($pg - $i) <= 3 || $i == 1 || $i == $end_page) {
                         ?>
-                            <a href="javascript:" onclick="pagination(<?php echo $i; ?>)" class="<?php echo $pg == $i ? "active" : ""; ?>"><?php echo $i; ?></a>
+                                    <a href="javascript:" onclick="pagination(<?php echo $i; ?>, '<?php echo htmlspecialchars($keyword); ?>', '<?php echo $category_id; ?>')" class="<?php echo $pg == $i ? "active" : ""; ?>"><?php echo $i; ?></a>
                         <?php
+                                }
                             }
+                        }
                         ?>
                     </div>
                 </div>
@@ -128,3 +149,19 @@ if ($pg < 1 || $pg == '' || !is_numeric($pg)) $pg = 1;
 </section>
 <!-- ==========Movie-Section========== -->
 <jsp:include page="footer.jsp" />
+
+<script>
+    function pagination(page, keyword, category_id) {
+        var url = 'films.html?p=' + page;
+
+        if (keyword && keyword !== "") {
+            url += '&keyword=' + encodeURIComponent(keyword);
+        }
+
+        if (category_id && category_id !== "") {
+            url += '&category_id=' + encodeURIComponent(category_id);
+        }
+
+        window.location.href = url;
+    }
+</script>

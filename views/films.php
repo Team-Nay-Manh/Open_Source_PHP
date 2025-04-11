@@ -152,15 +152,12 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
                     <div class="pagination-area text-center">
                         <?php
                         $end_page = ceil((float) $total_count / DATA_PER_PAGE);
-                        if ($end_page > 1) {
-                            for ($i = 1; $i <= $end_page; $i++) {
-                                if (abs($pg - $i) <= 3 || $i == 1 || $i == $end_page) {
+                        for ($i = 1; $i <= $end_page; $i++)
+                            if (abs($pg - $i) <= 3 || $i == 1 || $i == $end_page) {
                         ?>
-                                    <a href="javascript:" onclick="pagination(<?php echo $i; ?>, '<?php echo htmlspecialchars($keyword); ?>', '<?php echo $category_id; ?>')" class="<?php echo $pg == $i ? "active" : ""; ?>"><?php echo $i; ?></a>
+                            <a href="javascript:" onclick="pagination(<?php echo $i; ?>)" class="<?php echo $pg == $i ? "active" : ""; ?>"><?php echo $i; ?></a>
                         <?php
-                                }
                             }
-                        }
                         ?>
                     </div>
                 </div>
@@ -170,19 +167,3 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
 </section>
 <!-- ==========Movie-Section========== -->
 <jsp:include page="footer.jsp" />
-
-<script>
-    function pagination(page, keyword, category_id) {
-        var url = 'films.html?p=' + page;
-
-        if (keyword && keyword !== "") {
-            url += '&keyword=' + encodeURIComponent(keyword);
-        }
-
-        if (category_id && category_id !== "") {
-            url += '&category_id=' + encodeURIComponent(category_id);
-        }
-
-        window.location.href = url;
-    }
-</script>

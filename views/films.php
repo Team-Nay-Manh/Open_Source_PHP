@@ -48,6 +48,9 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
                         <?php if ($pg > 1) { ?>
                             <input type="hidden" name="p" value="<?php echo $pg; ?>" />
                         <?php } ?>
+                        <?php if ($category_id) { ?>
+                            <input type="hidden" name="category_id" value="<?php echo $category_id; ?>" />
+                        <?php } ?>
                     </form>
                 </div>
             </div>
@@ -61,11 +64,29 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
     <div class="container">
         <div class="row flex-wrap-reverse justify-content-center">
             <div class="col-sm-10 col-md-8 col-lg-3">
-                <div class="widget-1 widget-banner">
+                <div class="widget-1 widget-categories">
+                    <div class="widget-header">
+                        <h5 class="m-title">Thể loại</h5>
+                    </div>
                     <div class="widget-1-body">
-                        <a href="#0">
-                            <img src="./assets/images/sidebar/banner/banner01.jpg" alt="banner" />
-                        </a>
+                        <ul class="categories">
+                            <li>
+                                <a href="films.html" class="<?php echo $category_id == '' ? 'active' : ''; ?>">
+                                    <span>Tất cả</span>
+                                </a>
+                            </li>
+                            <?php
+                            $category = new Category();
+                            $list_categories = $category->GetCategories();
+                            foreach ($list_categories as $cat) {
+                            ?>
+                                <li>
+                                    <a href="films.html?category_id=<?php echo $cat['id']; ?>" class="<?php echo $category_id == $cat['id'] ? 'active' : ''; ?>">
+                                        <span><?php echo $cat['name']; ?></span>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                        </ul>
                     </div>
                 </div>
                 <div class="widget-1 widget-banner">
@@ -85,7 +106,7 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
                                 $film = new Film();
                                 if ($category_id) {
                                     $list_films = $film->GetFilmsByCategoryId($category_id, $pg);
-                                    $total_count = $film->GetCount();
+                                    $total_count = $film->GetCountByCategoryId($category_id);
                                 } else {
                                     $list_films = $film->GetFilms($pg, $keyword);
                                     $total_count = $keyword ? $film->GetCountByKeyword($keyword) : $film->GetCount();

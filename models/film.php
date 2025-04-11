@@ -21,6 +21,7 @@ class Film extends DB
 
   function GetFilmsByCategoryId($category_id, $page = 1)
   {
+    $category_id = mysqli_escape_string($this->conn, $category_id);
     $a = mysqli_query($this->conn, 'SELECT F.*, C.name AS country_name, R.name AS rated_name FROM category_film CF LEFT JOIN film F ON CF.film_id = F.id LEFT JOIN country C ON F.country_id = C.id LEFT JOIN rated R ON F.rated_id = R.id WHERE CF.category_id = ' . $category_id . ' ORDER BY F.id DESC ' . $this->Offset($page));
     $b = array();
     if (mysqli_num_rows($a))
@@ -133,6 +134,14 @@ class Film extends DB
     }
 
     $total = mysqli_query($this->conn, "SELECT COUNT(id) AS total FROM film " . $keyword);
+    $total = mysqli_fetch_assoc($total)['total'];
+    return $total;
+  }
+
+  public function GetCountByCategoryId($category_id)
+  {
+    $category_id = mysqli_escape_string($this->conn, $category_id);
+    $total = mysqli_query($this->conn, "SELECT COUNT(F.id) AS total FROM category_film CF LEFT JOIN film F ON CF.film_id = F.id WHERE CF.category_id = " . $category_id);
     $total = mysqli_fetch_assoc($total)['total'];
     return $total;
   }

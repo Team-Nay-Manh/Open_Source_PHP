@@ -8,7 +8,7 @@ define('MYSQL_HOST', 'localhost');  // Đổi từ 'localhost' thành 'mysql'
 define('MYSQL_USER', 'root');   // Tên user trong docker-compose.yml
 define('MYSQL_PASS', ''); // Mật khẩu đã đặt trong docker-compose.yml
 define('MYSQL_DB', 'da_php');
-define('DATA_PER_PAGE', '9');
+define('DATA_PER_PAGE', '6');
 define('DIALOGFLOW_AGENT_ID', '6e08a620-4272-4ba0-be06-c4f3b7366ddf');
 define('DIALOGFLOW_LANGUAGE_CODE', 'vi');
 define('DIALOGFLOW_CHAT_TITLE', 'Vì Tinh Tú - Chatbot');

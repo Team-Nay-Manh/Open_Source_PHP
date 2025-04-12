@@ -126,9 +126,7 @@ class Film extends DB
   public function GetCountByKeyword($keyword = '')
   {
     if ($keyword != '') {
-      $keyword = 'WHERE name LIKE "%' . mysqli_escape_string($this->conn, $keyword) . '%" 
-                  OR director LIKE "%' . mysqli_escape_string($this->conn, $keyword) . '%" 
-                  OR actor LIKE "%' . mysqli_escape_string($this->conn, $keyword) . '%"';
+      $keyword = 'WHERE name LIKE "%' . mysqli_escape_string($this->conn, $keyword) . '%"';
     } else {
       $keyword = '';
     }
@@ -141,11 +139,10 @@ class Film extends DB
   public function GetCountByCategoryId($category_id)
   {
     $category_id = mysqli_escape_string($this->conn, $category_id);
-    $total = mysqli_query($this->conn, "SELECT COUNT(F.id) AS total FROM category_film CF LEFT JOIN film F ON CF.film_id = F.id WHERE CF.category_id = " . $category_id);
+    $total = mysqli_query($this->conn, 'SELECT COUNT(F.id) AS total FROM category_film CF LEFT JOIN film F ON CF.film_id = F.id WHERE CF.category_id = ' . $category_id);
     $total = mysqli_fetch_assoc($total)['total'];
     return $total;
   }
 }
 
-//hihi
 //insert

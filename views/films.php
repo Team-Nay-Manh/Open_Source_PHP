@@ -1,5 +1,5 @@
 <?php
-$pg = isset($_GET['p']) ? $_GET['p'] : 1;
+$pg = getGET('p');
 if ($pg < 1 || $pg == '' || !is_numeric($pg)) $pg = 1;
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
@@ -47,9 +47,6 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
                         </div>
                         <?php if ($pg > 1) { ?>
                             <input type="hidden" name="p" value="<?php echo $pg; ?>" />
-                        <?php } ?>
-                        <?php if ($category_id) { ?>
-                            <input type="hidden" name="category_id" value="<?php echo $category_id; ?>" />
                         <?php } ?>
                     </form>
                 </div>
@@ -166,4 +163,3 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
     </div>
 </section>
 <!-- ==========Movie-Section========== -->
-<jsp:include page="footer.jsp" />

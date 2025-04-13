@@ -1,7 +1,7 @@
-# Team Nay Manh
+# Dự án website đặt vé xem phim
 
-bui hoang viet
-pham tran nhat minh
-luu nguyen hanh duyen
-nguyen lam son
-bui chi bao
+Bùi Hoàng Việt,
+Phạm Trần Nhật Minh,
+Lưu Nguyễn Hạnh Duyên,
+Nguyễn Lâm Sơn,
+Bùi Chí Bảo,

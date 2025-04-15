@@ -45,9 +45,6 @@ $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : '';
                             <input type="text" placeholder="Tìm phim" name="keyword" value="<?php echo htmlspecialchars($keyword); ?>" />
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </div>
-                        <?php if ($pg > 1) { ?>
-                            <input type="hidden" name="p" value="<?php echo $pg; ?>" />
-                        <?php } ?>
                     </form>
                 </div>
             </div>

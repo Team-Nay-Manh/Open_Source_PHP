@@ -11,5 +11,10 @@ $page = getREQUEST('page');
 if (empty($page)) header('Location: index.html');
 
 include_once('views/header.php');
-include getViewPage('views/' . $page . '.php');
+$viewPath = getViewPage('views/' . $page . '.php');
+if (!empty($viewPath)) {
+  include $viewPath;
+} else {
+  echo '<div class="alert alert-danger">Không tìm thấy trang yêu cầu.</div>';
+}
 include_once('views/footer.php');

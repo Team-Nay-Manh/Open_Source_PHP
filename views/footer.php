@@ -1,10 +1,13 @@
+<?php 
+    require_once("config/config.php");
+?>
 <!-- ==========Newslater-Section========== -->
 <footer class="footer-section">
     <div class="container">
         <div class="footer-top">
             <div class="logo">
                 <a href="index-1.html">
-                    <img src="assets/images/footer/footer-logo.png" alt="footer" />
+                    <img src="assets/images/footer/footer-logo-.png" alt="footer" />
                 </a>
             </div>
             <ul class="social-icons">
@@ -38,7 +41,7 @@
         <div class="footer-bottom">
             <div class="footer-bottom-area">
                 <div class="left">
-                    <p>Copyright &copy; 2023. All Rights Reserved By <a href="#0">NoName</a></p>
+                    <p>Copyright &copy; 2025. All Rights Reserved By <a href="#0">Teamnaymanh</a></p>
                 </div>
                 <ul class="links">
                     <li>
@@ -97,18 +100,19 @@
         return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Nice Select
         $(".select-bar").niceSelect();
-        $('div.select-bar').on('click', function (event) {
+        $('div.select-bar').on('click', function(event) {
             console.log(event);
             if (event.target.className.includes("option") && !event.target.className.includes("focus"))
                 redirectParams('date', event.target.innerText);
-//                console.log(event.target.innerText);
+            //                console.log(event.target.innerText);
         });
     });
 
     let schedule_id = 0;
+
     function setScheduleId(id) {
         schedule_id = id;
     }
@@ -121,6 +125,16 @@
         window.location.href = 'purchase.html?schedule_id=' + sid + '&seats=' + $('#code-seat').text().trim(',');
     }
 </script>
+
+<!--chat bot-->
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger intent="WELCOME"
+              chat-icon="<?php echo DIALOGFLOW_CHAT_ICON ?>"
+              chat-title="<?php echo DIALOGFLOW_CHAT_TITLE ?>"
+              agent-id="<?php echo DIALOGFLOW_AGENT_ID ?>"
+              language-code="<?php echo DIALOGFLOW_LANGUAGE_CODE ?>">
+
+</df-messenger>
 </body>
 
 </html>
